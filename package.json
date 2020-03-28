@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app",
     "start-dev": "nodemon app",
-    "sass:watch": "sass -w ./sass/main.scss ./public/css/style.css"
+    "sass:watch": "node-sass -w ./sass/main.scss ./public/css/style.css"
   },
   "keywords": [
     "Snocream",
@@ -25,7 +25,7 @@
     "sqlite3": "^4.1.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2",
-    "sass": "^1.26.3"
+    "node-sass": "^4.13.1",
+    "nodemon": "^2.0.2"
   }
 }
