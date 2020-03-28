@@ -1,0 +1,29 @@
+{
+  "name": "snocream2",
+  "version": "1.0.0",
+  "description": "This is a remake of Snocream's website",
+  "main": "app.js",
+  "scripts": {
+    "start" : "node app", 
+    "start-dev" : "nodemon app", 
+    "sass:watch" : "sass -w ./sass/main.scss ./public/css/style.css"
+  },
+  "keywords": [
+    "Snocream",
+    "Knoxville"
+  ],
+  "author": "Hayden Bradfield",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6",
+    "knex": "^0.20.13",
+    "sqlite3": "^4.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2",
+    "sass": "^1.26.3"
+  }
+}
