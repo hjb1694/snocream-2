@@ -17,6 +17,7 @@ app.use((req,res,next) => {
     next();
 });
 
+app.use('/admin', require('./routes/admin'));
 app.use('/', require('./routes/general'));
 
 app.use('*', (req,res) => res.status(404).redirect('/'));
