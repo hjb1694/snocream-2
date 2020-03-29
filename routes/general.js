@@ -1,7 +1,8 @@
 const router = require('express').Router();
+const generalController = require('../controllers/generalController');
 
 
-router.get('/', (req,res) => res.send('testing this'));
+router.get('/', (req,res) => generalController.renderHomePage);
 
 
 
