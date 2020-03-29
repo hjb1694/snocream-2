@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app",
     "start-dev": "nodemon app",
-    "sass:watch": "node-sass -w ./sass/main.scss ./public/css/style.css"
+    "sass:watch": "node-sass -w ./sass/main.scss ./public/css/style.css --output-style='compressed'"
   },
   "keywords": [
     "Snocream",
