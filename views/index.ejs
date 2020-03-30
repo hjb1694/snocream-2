@@ -5,58 +5,62 @@
 <body>
     <!-- Header and Nav -->
     <%- include('./partials/headerNav.ejs') %>
-    <!-- Carousel -->
-    <%- include('./partials/homePage/carousel.ejs') %>
-    <main>
-        <section class="section briefing-section">
-            <div class="container">
-                <h2 class="section-heading briefing-section__heading">What is Snocream?</h2>
-                <p class="briefing-section__text"><strong class="emph-text">Sno Cream</strong> is an inspired name from <strong class="emph-text">Subling</strong>, a popular south east Asian shaved milk dessert 
-                    which is originally from Korea. The original name for the similar dessert is Bingsu. 
-                    Using <strong class="emph-text">condensed milk</strong> and <strong class="emph-text">yummy flavors</strong>, a sweet snow is produced. 
-                    Topped with <strong class="emph-text">fresh fruits</strong> and other <strong class="emph-text">delicious goodies</strong>, a truly unique dessert is crafted. 
-                    Come experience one of <strong class="emph-text">Knoxville's most loved</strong> treats!</p>
-                <a href="#" class="link-btn briefing-section__btn">See Our Menu</a>
-            </div>
-        </section>
-        <section class="section location-section">
-            <div class="container">
-                <h2 class="section-heading location-section__heading">Come See Us!</h2>
-                <div class="location-section__content">
-                    <div class="location-section__map-container">
-                        <div id="map"></div>
-                        <img class="pin" src="/img/pin2-transparent.gif" alt="pin">
-                    </div>
-                    <div class="location-section__details-container">
-                        <div class="location-section__details">
-                            <h3 class="location-section__details-heading">Address</h3>
-                            <div class="location-section__address">
-                                <p>Turkey Creek</p>
-                                <p>10911 Parkside Dr.</p>
-                                <p>Knoxville, TN 37934</p>
-                                <p>865.288.4136</p>
-                            </div>
-                            <h3 class="location-section__details-heading">Hours</h3>
-                            <div class="location-section__hours">
-                                <p><strong>Sun</strong> 12:00PM-9:00PM</p>
-                                <p><strong>Mon</strong> 12:00PM-9:00PM</p>
-                                <p><strong>Tue</strong> 12:00PM-9:00PM</p>
-                                <p><strong>Wed</strong> 12:00PM-9:00PM</p>
-                                <p><strong>Thu</strong> 12:00PM-9:00PM</p>
-                                <p><strong>Fri</strong> 12:00PM-10:00PM</p>
-                                <p><strong>Sat</strong> 12:00PM-10:00PM</p>
+    <div class="mainContainer">
+        <!-- Maintenence Mode Alert -->
+        <%- include('./partials/softMaintModeAlert.ejs') %>
+        <!-- Carousel -->
+        <%- include('./partials/homePage/carousel.ejs') %>
+        <main>
+            <section class="section briefing-section">
+                <div class="container">
+                    <h2 class="section-heading briefing-section__heading">What is Snocream?</h2>
+                    <p class="briefing-section__text"><strong class="emph-text">Sno Cream</strong> is an inspired name from <strong class="emph-text">Subling</strong>, a popular south east Asian shaved milk dessert 
+                        which is originally from Korea. The original name for the similar dessert is Bingsu. 
+                        Using <strong class="emph-text">condensed milk</strong> and <strong class="emph-text">yummy flavors</strong>, a sweet snow is produced. 
+                        Topped with <strong class="emph-text">fresh fruits</strong> and other <strong class="emph-text">delicious goodies</strong>, a truly unique dessert is crafted. 
+                        Come experience one of <strong class="emph-text">Knoxville's most loved</strong> treats!</p>
+                    <a href="#" class="link-btn briefing-section__btn">See Our Menu</a>
+                </div>
+            </section>
+            <section class="section location-section">
+                <div class="container">
+                    <h2 class="section-heading location-section__heading">Come See Us!</h2>
+                    <div class="location-section__content">
+                        <div class="location-section__map-container">
+                            <div id="map"></div>
+                            <img class="pin" src="/img/pin2-transparent.gif" alt="pin">
+                        </div>
+                        <div class="location-section__details-container">
+                            <div class="location-section__details">
+                                <h3 class="location-section__details-heading">Address</h3>
+                                <div class="location-section__address">
+                                    <p>Turkey Creek</p>
+                                    <p>10911 Parkside Dr.</p>
+                                    <p>Knoxville, TN 37934</p>
+                                    <p>865.288.4136</p>
+                                </div>
+                                <h3 class="location-section__details-heading">Hours</h3>
+                                <div class="location-section__hours">
+                                    <p><strong>Sun</strong> 12:00PM-9:00PM</p>
+                                    <p><strong>Mon</strong> 12:00PM-9:00PM</p>
+                                    <p><strong>Tue</strong> 12:00PM-9:00PM</p>
+                                    <p><strong>Wed</strong> 12:00PM-9:00PM</p>
+                                    <p><strong>Thu</strong> 12:00PM-9:00PM</p>
+                                    <p><strong>Fri</strong> 12:00PM-10:00PM</p>
+                                    <p><strong>Sat</strong> 12:00PM-10:00PM</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section class="section">
+            </section>
+            <section class="section">
 
-        </section>
-    </main>
-    <!-- Footer -->
-    <%- include('./partials/footer.ejs') %>
+            </section>
+        </main>
+        <!-- Footer -->
+        <%- include('./partials/footer.ejs') %>
+    </div>
     <script src="/glide-3.4.1/dist/glide.min.js"></script>
     <script src="/js/carousel.js"></script>
     <script src="/js/navToggle.js"></script>

@@ -65,13 +65,16 @@ body{
     }
 }
 
+.mainContainer{
+    margin-top:5rem;
+}
+
 .container{
     max-width:70rem;
     margin:0 auto;
 }
 
 .carousel-section{
-    margin-top:5rem;
     background-image:linear-gradient(to bottom right, rgba(255,255,255,.4), rgba(255,255,255,.45)), url('../img/dots-light.jpg');
     background-position: center;
     background-size:cover;
@@ -301,6 +304,14 @@ body{
         font-size:1.1rem;
         text-align:center;
     }
+}
+
+.maintenanceModeAlert{
+    background:#3191cc;
+    padding:1rem;
+    color:#fff;
+    font-family:'Roboto', sans-serif;
+    font-size:1.2rem;
 }
 
 @media (max-width:550px) {

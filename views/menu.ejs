@@ -5,44 +5,46 @@
 <body>
     <!-- Header and Nav -->
     <%- include('partials/headerNav.ejs') %>
-    <main>
-        <section class="menu-main-heading">
-            <h1>Our Menu</h1>
-        </section>
-        <div class="container p15">
-            <% for(category of menuItemsByCategory) { %>
-            <div class="menu-cat">
-                <h2 class="menu-cat__heading"><%= category.category %></h2>
-                <div class="menu-cat__menu-items">
-                    <% for(menuItem of category.menuItems) { %>
-                    <div 
-                    class="menu-item"
-                    data-name="<%= menuItem.name %>"
-                    data-description="<%= menuItem.description %>"
-                    data-img="<%= menuItem.image %>"
-                    >
-                        <div class="menu-item__img-container">
-                            <img class="menu-item__img" src="/img/menu_items/<%= menuItem.image %>" alt="<%= menuItem.name %>">
+    <div class="mainContainer">
+        <main>
+            <section class="menu-main-heading">
+                <h1>Our Menu</h1>
+            </section>
+            <div class="container p15">
+                <% for(category of menuItemsByCategory) { %>
+                <div class="menu-cat">
+                    <h2 class="menu-cat__heading"><%= category.category %></h2>
+                    <div class="menu-cat__menu-items">
+                        <% for(menuItem of category.menuItems) { %>
+                        <div 
+                        class="menu-item"
+                        data-name="<%= menuItem.name %>"
+                        data-description="<%= menuItem.description %>"
+                        data-img="<%= menuItem.image %>"
+                        >
+                            <div class="menu-item__img-container">
+                                <img class="menu-item__img" src="/img/menu_items/<%= menuItem.image %>" alt="<%= menuItem.name %>">
+                            </div>
+                            <div class="menu-item__name">
+                                <%= menuItem.name %>
+                            </div>
                         </div>
-                        <div class="menu-item__name">
-                            <%= menuItem.name %>
-                        </div>
+                        <% } %>
                     </div>
-                    <% } %>
+                </div>
+                <% } %>
+            </div>
+            <div class="modal">
+                <div class="modal__content">
+                    <img class="modal__img"/>
+                    <h3 class="modal__item-name"></h3>
+                    <p class="modal__item-desc"></p>
                 </div>
             </div>
-            <% } %>
-        </div>
-        <div class="modal">
-            <div class="modal__content">
-                <img class="modal__img"/>
-                <h3 class="modal__item-name"></h3>
-                <p class="modal__item-desc"></p>
-            </div>
-        </div>
-    </main>
-    <!-- Footer -->
-    <%- include('./partials/footer.ejs') %>
+        </main>
+        <!-- Footer -->
+        <%- include('./partials/footer.ejs') %>
+    </div>
     <script src="/js/navToggle.js"></script>
     <script>
         const menuItems = document.querySelectorAll('.menu-item');

@@ -41,6 +41,16 @@ app.use((req,res,next) => {
     next();
 });
 
+// Soft maintenance mode
+app.use((req,res,next) => {
+    let mode;
+    if(config.maintenanceMode.softMode.toLowerCase() === 'on')
+        mode = true;
+    else mode = false;
+    app.locals.softMaintenanceMode = mode;
+    next();
+});
+
 app.use('/admin', require('./routes/admin'));
 app.use('/', require('./routes/general'));
 
