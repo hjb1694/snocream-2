@@ -10,75 +10,72 @@
             <h1>Our Menu</h1>
         </section>
         <div class="container p15">
+            <% for(category of menuItemsByCategory) { %>
             <div class="menu-cat">
-                <h2 class="menu-cat__heading">Sno Creams</h2>
+                <h2 class="menu-cat__heading"><%= category.category %></h2>
                 <div class="menu-cat__menu-items">
-                    <div class="menu-item">
+                    <% for(menuItem of category.menuItems) { %>
+                    <div 
+                    class="menu-item"
+                    data-name="<%= menuItem.name %>"
+                    data-description="<%= menuItem.description %>"
+                    data-img="<%= menuItem.image %>"
+                    >
                         <div class="menu-item__img-container">
-                            <img class="menu-item__img" src="http://www.placehold.it/400x400" alt="">
+                            <img class="menu-item__img" src="/img/menu_items/<%= menuItem.image %>" alt="<%= menuItem.name %>">
                         </div>
                         <div class="menu-item__name">
-                            Item 1
+                            <%= menuItem.name %>
                         </div>
                     </div>
-                    <div class="menu-item">
-                        <div class="menu-item__img-container">
-                            <img class="menu-item__img" src="http://www.placehold.it/400x400" alt="">
-                        </div>
-                        <div class="menu-item__name">
-                            Item 2
-                        </div>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item__img-container">
-                            <img class="menu-item__img" src="http://www.placehold.it/400x400" alt="">
-                        </div>
-                        <div class="menu-item__name">
-                            Item 3
-                        </div>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item__img-container">
-                            <img class="menu-item__img" src="http://www.placehold.it/400x400" alt="">
-                        </div>
-                        <div class="menu-item__name">
-                            Item 4
-                        </div>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item__img-container">
-                            <img class="menu-item__img" src="http://www.placehold.it/400x400" alt="">
-                        </div>
-                        <div class="menu-item__name">
-                            Item 5
-                        </div>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item__img-container">
-                            <img class="menu-item__img" src="http://www.placehold.it/400x400" alt="">
-                        </div>
-                        <div class="menu-item__name">
-                            Green Tea Macha
-                        </div>
-                    </div>
+                    <% } %>
                 </div>
             </div>
-            <div class="menu-cat">
-                <h2 class="menu-cat__heading">Boba Teas</h2>
-                <div class="menu-cat__menu-items">
-                    <div class="menu-item">
-                        <div class="menu-item__img-container">
-                            <img class="menu-item__img" src="http://www.placehold.it/400x400" alt="">
-                        </div>
-                        <div class="menu-item__name">
-                            Item 1
-                        </div>
-                    </div>
-                </div>
+            <% } %>
+        </div>
+        <div class="modal">
+            <div class="modal__content">
+                <img class="modal__img"/>
+                <h3 class="modal__item-name"></h3>
+                <p class="modal__item-desc"></p>
             </div>
         </div>
     </main>
     <!-- Footer -->
     <%- include('./partials/footer.ejs') %>
+    <script src="/js/navToggle.js"></script>
+    <script>
+        const menuItems = document.querySelectorAll('.menu-item');
+        const modal = document.querySelector('.modal');
+        const modalContent = document.querySelector('.modal__content');
+        const modalImg = document.querySelector('.modal__img');
+        const itemName = document.querySelector('.modal__item-name');
+        const itemDesc = document.querySelector('.modal__item-desc');
+
+        for(let menuItem of menuItems){
+
+            menuItem.addEventListener('click', () => {
+
+                modalImg.src = `/img/menu_items/${menuItem.getAttribute('data-img')}`;
+                itemName.innerText = menuItem.getAttribute('data-name');
+                itemDesc.innerText = menuItem.getAttribute('data-description');
+                modal.style.display = 'flex';
+
+
+            });
+
+
+        }
+
+        modal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        modalContent.addEventListener('click', e => {
+            e.stopImmediatePropagation();
+        });
+
+    
+    </script>
 </body>
 </html>
