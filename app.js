@@ -1,11 +1,36 @@
 const path = require('path');
+const fs = require('fs');
 const config = require('./config');
 const express = require('express');
 const fileUpload = require('express-fileupload');
+const helmet = require('helmet');
+const session = require('express-session');
 const app = express();
+const morgan = require('morgan');
+
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+
+
+const sess = {
+    secret : config.sessionSecret,
+    cookie : {
+        maxAge : 1000 * 60 * 60, // 1 hour
+        sameSite : true, 
+    }, 
+    resave : false, 
+    saveUninitialized : false
+}
+
+if(config.env.toLowerCase() === 'production'){
+    app.set('trust proxy', 1);
+    sess.cookie.secure = true;
+}
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
+app.use(helmet());
+app.use(morgan('combined', {stream : accessLogStream}));
+app.use(session(sess));
 app.use(express.json());
 app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
