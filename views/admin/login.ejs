@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head -->
+<%- include('partials/head.ejs') %>
+<body>
+    <main>
+        <div class="login-container">
+            <form class="login-form" action="">
+                <h1>Login</h1>
+                <div class="form-control">
+                    <label for="username" class="label">Username</label>
+                    <input type="text" name="username" id="username" class="text-input">
+                </div>
+                <div class="form-control">
+                    <label for="password" class="label">Password</label>
+                    <input type="password" name="password" id="password" class="text-input">
+                </div>
+                <div class="form-control">
+                    <button id="subbut" class="btn btn--primary btn--block" type="submit">Login</button>
+                </div>
+                <div class="errbox"></div>
+            </form>
+        </div>
+    </main>
+    <script>
+        document.querySelector('#subbut').addEventListener('click', e => {
+            e.preventDefault();
+
+            const errbox = document.querySelector('.errbox');
+            errbox.innerText = null;
+            errbox.style.display = 'none';
+
+            const fields = {
+                username : document.querySelector('#username').value.trim(), 
+                password : document.querySelector('#password').value
+            }
+
+            let errors = [];
+
+            !fields.username.length && errors.push('Please enter a username.');
+            !fields.password.length && errors.push('Please enter a password.')
+        
+            function addErrboxErrors(errors){
+                errbox.style.display = 'block';
+                for(let error of errors){
+                    errbox.insertAdjacentHTML('beforeend', `<p>${error}</p>`);
+                }
+            }
+
+
+            if(errors.length){
+                addErrboxErrors(errors);
+                return;
+            }
+
+            fetch('/admin/login', {
+                method : 'POST', 
+                headers : {
+                    'Content-Type' : 'application/json'
+                },
+                body : JSON.stringify(fields)
+            })
+            .then(resp => resp.json())
+            .then(resp => {
+                if(resp.status){
+                    if(resp.status === 'error'){
+                        addErrboxErrors([resp.data.msg]);
+                    }else if(resp.status === 'success'){
+                        window.location.replace('/admin');
+                    }
+                }else{
+                    addErrboxErrors(['An error has occurred.']);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                addErrboxErrors(['An error has occurred.']);
+            });
+
+            
+        });
+    </script>
+</body>
+</html>
