@@ -10,8 +10,7 @@ const morgan = require('morgan');
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
 
-
-const sess = {
+const sessConf = {
     secret : config.sessionSecret,
     cookie : {
         maxAge : 1000 * 60 * 60, // 1 hour
@@ -30,14 +29,14 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(helmet());
 app.use(morgan('combined', {stream : accessLogStream}));
-app.use(session(sess));
+app.use(session(sessConf));
 app.use(express.json());
 app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // If changes are made to maintenance mode, you must restart the running app!
 app.use((req,res,next) => {
-    if(config.maintenanceMode.toLowerCase() === 'on')
+    if(config.maintenanceMode.hardMode.toLowerCase() === 'on')
         return res.status(200).render('maintenance');
     next();
 });
