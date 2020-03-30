@@ -1,1 +1,3 @@
-exports.renderHomePage = (req,res) => res.render('index');
+exports.renderHomePage = (req,res) => {
+    res.render('index', {title : 'Home'});
+}

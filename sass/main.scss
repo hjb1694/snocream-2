@@ -72,7 +72,7 @@ body{
 
 .carousel-section{
     margin-top:5rem;
-    background-image:linear-gradient(to bottom right, rgba(255,255,255,.4), rgba(255,255,255,.45)), url(./dots-light.jpg);
+    background-image:linear-gradient(to bottom right, rgba(255,255,255,.4), rgba(255,255,255,.45)), url('../img/dots-light.jpg');
     background-position: center;
     background-size:cover;
 }
@@ -88,15 +88,15 @@ body{
 }
 
 .carousel-img--1{
-    background-image:url(./blueberry_lover.jpg);
+    background-image:url('../img/slideshow_imgs/blueberry_lover.jpg');
 }
 
 .carousel-img--2{
-    background-image:url(./choco-mocha.jpg);
+    background-image:url('../img/slideshow_imgs/choco-mocha.jpg');
 }
 
 .carousel-img--3{
-    background-image:url(./choco_cream-cropped.jpg);
+    background-image:url('../img/slideshow_imgs/choco_cream-cropped.jpg');
 }
 
 .glide{

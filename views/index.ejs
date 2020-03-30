@@ -1,58 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="Snocream Knoxville, Tennessee - Serving an Asian-inspired frozen dessert"/>
-    <meta name="keywords" content="Snocream, Bingsu, Frozen, Dessert, Treat, Knoxville, Tennessee, TN, Turkey Creek"/>
-    <title>Document</title>
-    <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/glide-3.4.1/dist/css/glide.core.min.css">
-    <link rel="stylesheet" href="/glide-3.4.1/dist/css/glide.theme.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-</head>
+<!-- Head -->
+<%- include('./partials/head.ejs') %>
 <body>
-    <header class="header">
-        <div class="header__one">
-            <a><img src="./snocream-logo-transparent.png" class="header__logo" alt="Snocream Logo"></a>
-        </div>
-        <div class="header__two">
-            <i class="header__navtoggle fa fa-bars"></i>
-            <nav class="navigation">
-                <i class="fa fa-close navigation__close-btn"></i>
-                <div class="navigation__list">
-                    <a href="#" class="navigation__item">Menu</a>
-                    <a href="#" class="navigation__item">Specials + Offers</a>
-                </div>
-            </nav>
-        </div>
-    </header>
-    <section class="carousel-section">
-        <div class="glide">
-            <div class="glide__track" data-glide-el="track">
-                <ul class="glide__slides">
-                <li class="glide__slide">
-                    <div class="carousel-img carousel-img--1"></div>
-                </li>
-                <li class="glide__slide">
-                    <div class="carousel-img carousel-img--2"></div>
-                </li>
-                <li class="glide__slide">
-                    <div class="carousel-img carousel-img--3"></div>
-                </li>
-                </ul>
-            </div>
-            <div class="glide__bullets" data-glide-el="controls[nav]">
-                <button class="glide__bullet" data-glide-dir="=0"></button>
-                <button class="glide__bullet" data-glide-dir="=1"></button>
-                <button class="glide__bullet" data-glide-dir="=2"></button>
-            </div>
-        </div>
-    </section>
+    <!-- Header and Nav -->
+    <%- include('./partials/headerNav.ejs') %>
+    <!-- Carousel -->
+    <%- include('./partials/homePage/carousel.ejs') %>
     <main>
         <section class="section briefing-section">
             <div class="container">
@@ -71,7 +25,7 @@
                 <div class="location-section__content">
                     <div class="location-section__map-container">
                         <div id="map"></div>
-                        <img class="pin" src="./pin2-transparent.gif" alt="pin">
+                        <img class="pin" src="/img/pin2-transparent.gif" alt="pin">
                     </div>
                     <div class="location-section__details-container">
                         <div class="location-section__details">
@@ -101,51 +55,12 @@
 
         </section>
     </main>
-    <footer class="footer">
-        <p><small>&copy;2020 Sno Cream</small></p>
-        <p class="hb">Made with &hearts; by Hayden Bradfield</p>
-    </footer>
+    <!-- Footer -->
+    <%- include('./partials/footer.ejs') %>
     <script src="/glide-3.4.1/dist/glide.min.js"></script>
-    <script>
-        new Glide('.glide', {
-        type: 'carousel',
-        startAt: 0, 
-        autoplay: 3000, 
-        hoverpause: false, 
-        gap : 1,
-        perView : 1, 
-        peek : {
-            before : 170, 
-            after : 170
-        },
-        breakpoints : {
-            800 : {
-                peek : {
-                    before : 0, 
-                    after : 0
-                }
-            }
-        }
-        }).mount();
-
-        document.querySelector('.header__navtoggle').addEventListener('click', () => {
-            document.querySelector('.navigation').classList.add('show');
-        });
-
-        document.querySelector('.navigation__close-btn').addEventListener('click', () => {
-            document.querySelector('.navigation').classList.remove('show');
-        });
-
-        function initMap(){
-            // The location of Uluru
-            var uluru = {lat: 35.90344, lng: -84.146722};
-            // The map, centered at Uluru
-            var map = new google.maps.Map(
-                document.getElementById('map'), {zoom: 15, center: uluru});
-            // The marker, positioned at Uluru
-            var marker = new google.maps.Marker({position: uluru, map: map});
-        }
-    </script>
+    <script src="/js/carousel.js"></script>
+    <script src="/js/navToggle.js"></script>
+    <script src="/js/map.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxHlWziSJ69DLsRY-eHiEYDTDdyZyoua8&callback=initMap"
     type="text/javascript"></script>
 </body>
