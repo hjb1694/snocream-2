@@ -1,0 +1,92 @@
+[
+    {
+        "category" : 1,
+        "name":"Choco Banana",
+        "description":"Chocolate sno cream, fresh banana, chocolate syrup, whip cream",
+        "image":"choco-banana-thumbnail.jpg"
+    },
+    {
+        "category" : 1,
+        "name":"Choco Mocha",
+        "description":"Mocha sno cream, chocolate malt powder, chocolate syrup, whip cream",
+        "image":"choco-mocha-thumbnail.jpg"
+    },
+    {
+        "category" : 1,
+        "name":"Choco Lover",
+        "description":"Chocolate snow, chocolate syrup, condensed milk, chocolate chips, mini chocolate chips, malt balls, chocolate flakes, chocolate malt powder, cream cheese whip",
+        "image":"choco-lover-thumbnail.jpg"
+    },
+    {
+        "category" : 1,
+        "name":"Strawberry Lover",
+        "description":"Strawberry snow, strawberry syrup, condensed milk, strawberry jelly, strawberry slices, cream cheese whip",
+        "image":"strawberry-lover-thumbnail.jpg"
+    },
+    {
+        "category" : 1,
+        "name":"Pineapple Cocoa",
+        "description":"Pineapple coconut snow, pineapple syrup, coconut syrup, condensed milk, pineapple jelly, pineapple chunks, cream cheese whip",
+        "image":"pineapple-cocoa-thumbnail.JPG"
+    },
+    {
+        "category" : 1,
+        "name":"Golden Kiwi",
+        "description":"Vanilla snow, kiwi syrup, condensed milk, kiwi jelly, golden kiwi slices, cream cheese whip",
+        "image":"golden-kiwi-thumbnail.JPG"
+    },
+    {
+        "category" : 1,
+        "name":"Mango Delight",
+        "description":"Mango snow, mango syrup, condensed milk, mango jelly, mango chunks, cream cheese whip",
+        "image":"mango-delight-thumbnail.jpg"
+    },
+    {
+        "category" : 1,
+        "name":"Amber Crush",
+        "description":"Vanilla snow, caramel syrup, condensed milk, cantaloupe balls, cream cheese whip",
+        "image":"amber-crush-thumbnail.JPG"
+    },
+    {
+        "category" : 1,
+        "name":"Honey Dew",
+        "description":"Honeydew snow, honeydew syrup, condensed milk, honeydew jelly, honeydew balls, cream cheese whip",
+        "image":"honey-dew-thumbnail.jpg"
+    },
+    {
+        "category" : 1,
+        "name":"Peach Blossum",
+        "description":"Milk snow, peach syrup, condensed milk, peach jelly, peach chunks, cream cheese whip",
+        "image":"peach-blossum-thumbnail.jpg"
+    },
+    {
+        "category" : 1,
+        "name":"Blueberry Lover",
+        "description":"Milk snow, blueberry syrup, condensed milk, blueberry jelly, blueberries, cream cheese whip",
+        "image":"blueberry-lover-thumbnail.jpg"
+    },
+    {
+        "category" : 1,
+        "name":"Red Bean on Snow",
+        "description":"Milk snow, caramel syrup, condensed milk, red bean paste, peanut butter powder, cream cheese whip",
+        "image":"red-bean-on-snow-thumbnail.JPG"
+    },
+    {
+        "category" : 1,
+        "name":"Sweet Purple Taro",
+        "description":"Taro snow, caramel syrup, condensed milk, red bean paste, peanut butter powder, cream cheese whip",
+        "image":"sweet-purple-taro-thumbnail.JPG"
+    },
+    {
+        "category" : 1,
+        "name":"Thai Tea Almond",
+        "description":"Thai tea snow, Thai tea syrup, condensed milk, Thai tea pudding, roasted almonds, cream cheese whip",
+        "image":"thai-tea-almond-thumbnail.JPG"
+    },
+    {
+        "category" : 1,
+        "name":"Green Tea Matcha",
+        "description":"Green tea snow, green tea syrup, condensed milk, green tea pudding, roasted almonds, matcha powder, cream cheese whip",
+        "image":"green-tea-matcha-thumbnail.JPG"
+    }
+]

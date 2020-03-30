@@ -3,6 +3,7 @@ const generalController = require('../controllers/generalController');
 
 
 router.get('/', generalController.renderHomePage);
+router.get('/menu', generalController.renderMenuPage);
 
 
 
