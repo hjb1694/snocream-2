@@ -4,7 +4,8 @@ const {
     deleteMenuCat, 
     addMenuCategory, 
     editMenuCategory, 
-    getMenuItems
+    getMenuItems, 
+    getSingleMenuItem
 } = require('../database/queries/admin');
 const bcrypt = require('bcryptjs');
 const unique = require('array-unique');
@@ -186,5 +187,27 @@ exports.menuItems = async (req,res) => {
     });
 
     res.render('admin/menuItems.ejs', {menuItemsByCategory});
+
+}
+
+exports.singleMenuItem = async (req,res) => {
+
+    const itemId = req.params.id;
+
+    const menuItem = await getSingleMenuItem(itemId);
+
+    if(!menuItem.length)
+        return res.redirect('/admin/menu-items');
+
+    res.render('admin/singleMenuItem', {menuItem : menuItem[0]});
+
+}
+
+exports.newMenuItem = async (req,res) => {
+
+    const menuCats = await getMenuCats();
+
+    res.render('admin/newMenuItem', {menuCats});
+
 
 }

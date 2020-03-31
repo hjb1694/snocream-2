@@ -10,5 +10,25 @@
         <a href="/admin"><i class="fa fa-caret-left"></i> Main Panel</a>
         <a>Logout <i class="fa fa-sign-out"></i></a>
     </nav>
+    <a 
+    class="btn btn--primary btn--block"
+    style="max-width:20rem; margin:1rem auto;"
+    href="/admin/menu-items/new"
+    >Add Menu Item</a>
+    <div class="menu-items-listings">
+        <% for(let cat of menuItemsByCategory) { %>
+        <div class="menu-items-category">
+            <h3 class="menu-items-category__heading">Category: <%= cat.category %> <a href="/admin/menu-categories"><i class="fa fa-edit"></i></a></a></h3>
+            <div class="menu-items-list">
+                <% for(let menuItem of cat.menuItems){ %>
+                <div class="menu-item">
+                    <h4 class="menu-item__name"><a href="/admin/menu-items/<%= menuItem.id %>"><%= menuItem.name %></a></h4>
+                    <img class="menu-item__thumbnail" src="/img/menu_items/<%= menuItem.image %>"/>
+                </div>
+                <% } %>
+            </div>
+        </div>
+        <% } %>
+    </div>
 </body>
 </html>

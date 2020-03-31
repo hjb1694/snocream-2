@@ -97,5 +97,31 @@ module.exports = {
             throw new Error('unable to fetch data from database.');
         }
 
+    }, 
+    async getSingleMenuItem(itemId){
+
+        try{
+
+            const result = await knex.column({
+                id : 'menu_items.id', 
+                name : 'menu_items.name',
+                catId : 'menu_items.category', 
+                catName : 'menu_categories.category', 
+                description : 'menu_items.description',
+                image : 'menu_items.image'
+            })
+            .from('menu_items')
+            .join('menu_categories','menu_items.category','menu_categories.id')
+            .where({'menu_items.id' : itemId})
+            .select();
+
+            return result;
+
+
+        }catch(e){
+            console.log(e);
+            throw new Error('unable to fetch data from database.');
+        }
+
     }
 }

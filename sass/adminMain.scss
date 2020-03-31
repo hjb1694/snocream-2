@@ -57,7 +57,7 @@ main{
     color:#555
 }
 
-.text-input{
+.text-input, .select-input{
     border:0;
     background:rgb(216, 230, 255);
     font-size:1.5rem;
@@ -66,12 +66,21 @@ main{
     width:100%;
 }
 
+.file-input{
+    width:100%;
+    padding:1rem;
+    border:1px solid #777;
+    margin-top:2px;
+    border-radius:4px;
+}
+
 .btn{
     padding:1rem;
     font-size:1.2rem;
     background:transparent;
     text-transform: uppercase;
     cursor:pointer;
+    text-decoration: none;
 
     &--primary{
         border:2px solid #4972e3;
@@ -214,4 +223,58 @@ main{
     &.show{
         display:flex;
     }
+}
+
+.menu-items-listings{
+    max-width:40rem;
+    margin:auto;
+}
+
+.menu-items-category{
+    &__heading{
+        font-size:1.2rem;
+    }
+}
+
+.menu-item{
+    border-bottom:1px solid #ccc;
+    margin-top:1rem;
+    padding:1rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    &__name{
+        font-size:1.1rem;
+        color:#777;
+    }
+
+    &__thumbnail{
+        width:4rem;
+    }
+}
+
+.menu-item-details{
+    margin-top:2rem;
+    max-width:40rem;
+    margin:auto;
+
+    &__name{
+        font-size:1.2rem;
+    }
+
+    &__desc{
+        font-size:1rem;
+        margin-top:1rem;
+    }
+
+    &__cat{
+        margin-top:1rem;
+        font-size:1rem;
+    }
+}
+
+.add-menu-item-form{
+    margin:2rem auto;
+    max-width:30rem;
 }
