@@ -3,9 +3,11 @@ const {
     getMenuCats, 
     deleteMenuCat, 
     addMenuCategory, 
-    editMenuCategory
+    editMenuCategory, 
+    getMenuItems
 } = require('../database/queries/admin');
 const bcrypt = require('bcryptjs');
+const unique = require('array-unique');
 
 exports.loginPage = (req,res) => {
 
@@ -157,5 +159,32 @@ exports.editMenuCat = async (req,res) => {
             }
         });
     }
+
+}
+
+
+exports.menuItems = async (req,res) => {
+
+    const menuItems = await getMenuItems();
+
+    const menuCategories = menuItems.map(item => item.category);
+
+    const uniqueMenuCategories = unique(menuCategories);
+
+    const menuItemsByCategory = [];
+
+    uniqueMenuCategories.forEach(item => {
+
+        const categoryObj = {
+            category : item,
+        };
+
+        categoryObj.menuItems = menuItems.filter(i => i.category == item);
+
+        menuItemsByCategory.push(categoryObj);
+
+    });
+
+    res.render('admin/menuItems.ejs', {menuItemsByCategory});
 
 }
