@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head -->
+<%- include('partials/head.ejs') %>
+<body class="p1 text-center">
+    <img src="/img/snocream-logo-transparent.png" class="logo"/>
+    <h1>Administration Panel</h1>
+    <h2>Menu Categories</h2>
+    <nav class="subpanel-nav">
+        <a href="/admin"><i class="fa fa-caret-left"></i> Main Panel</a>
+        <a>Logout <i class="fa fa-sign-out"></i></a>
+    </nav>
+    <div class="dropdown-pane">
+        <div class="dropdown-pane__title">
+            <span>Add Category</span>
+        </div>
+        <div class="dropdown-pane__content">
+            <form class="add-menu-category-form">
+                <div class="form-group">
+                    <label for="newCategory" class="label">New Category</label>
+                    <input type="text" name="newCategory" id="newCategory" class="text-input">
+                </div>
+                <button id="subbut" class="btn btn--primary btn--block">Add Item</button>
+            </form>
+        </div>
+    </div>
+    <% if(categories.length) { %>
+    <div class="list">
+        <% for(let cat of categories) { %>
+        <li>
+            <span><%= cat.category %></span>
+            <div class="list__opts">
+                <i data-id="<%= cat.id %>" data-cat-name="<%= cat.category %>" title="edit" class="list__edit-icon fa fa-edit"></i>
+                <i data-id="<%= cat.id %>" title="delete" class="list__delete-icon fa fa-close"></i>
+            </div>
+        </li>
+        <% } %>
+    </div>
+    <% } %>
+    <div class="modal" id="editModal">
+        <div class="modal__content">
+            <h2 class="modal__heading">Edit Category</h2>
+            <form>
+                <input type="hidden" name="catIdToEdit" id="catIdToEdit">
+                <div class="form-group">
+                    <label for="editcategory" class="label">Category Name</label>
+                    <input type="text" class="text-input" name="editcategory" id="editcategory">
+                </div>
+                <div class="form-group">
+                    <button id="editSubbut" class="btn btn--primary btn--block">Make Change</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" id="cancelEdit" class="btn btn--danger btn--block">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        const deleteIcons = document.querySelectorAll('.list__delete-icon');
+
+        for(let delIcon of deleteIcons){
+
+            delIcon.addEventListener('click', e => {
+
+                const toDelete = confirm('Are you sure you want to delete this category?');
+
+                if(!toDelete) return;
+
+                const id = e.target.getAttribute('data-id');
+
+                fetch('/admin/menu-categories', {
+                    method : 'DELETE', 
+                    headers : {
+                        'Content-Type' : 'application/json'
+                    }, 
+                    body : JSON.stringify({itemId : id})
+                })
+                .then(resp => resp.json())
+                .then(resp => {
+                    if(resp.status === 'success'){
+                        window.location.reload();
+                    }else{
+                        alert('An error occurred.');
+                    }
+                })
+                .catch(e => {
+                    alert('An error occurred.');
+                });
+
+            });
+
+        }
+
+        const editIcons = document.querySelectorAll('.list__edit-icon');
+        const editModal = document.querySelector('#editModal');
+        const cancelEditBtn = document.querySelector('#cancelEdit');
+        const editCategoryInput = document.querySelector('#editcategory');
+        const catIdToEditHiddenInp = document.querySelector('#catIdToEdit');
+        const editSubbut = document.querySelector('#editSubbut');
+
+
+        for(let icon of editIcons){
+
+            icon.addEventListener('click', e => {
+
+                const id = icon.getAttribute('data-id');
+
+                editCategoryInput.value = e.target.getAttribute('data-cat-name');
+                catIdToEditHiddenInp.value = e.target.getAttribute('data-id');
+                editModal.classList.add('show');
+
+            });
+
+        }
+
+        cancelEditBtn.addEventListener('click', () => {
+            editCategoryInput.value = null;
+            catIdToEditHiddenInp.value = null;
+            editModal.classList.remove('show');
+        });
+
+        editSubbut.addEventListener('click', e => {
+            e.preventDefault();
+            const fields = {
+                catId : document.querySelector('#catIdToEdit').value, 
+                category : document.querySelector('#editcategory').value.trim()
+            }
+
+            fetch('/admin/menu-categories', {
+                method : 'PATCH', 
+                headers : {
+                    'Content-Type' : 'application/json'
+                }, 
+                body : JSON.stringify(fields)
+            })
+            .then(resp => resp.json())
+            .then(resp => {
+                if(resp.status && resp.status === 'success'){
+                    window.location.reload();
+                }else{
+                    alert('An error has occurred.');
+                }
+            })
+            .catch(err => {
+                alert('An error has occurred.');
+            })
+
+
+        })
+
+        document.querySelector('#subbut').addEventListener('click', e => {
+            e.preventDefault();
+
+            const newCategory = document.querySelector('#newCategory').value.trim();
+
+            if(!newCategory.length){
+                alert('Please enter a category.');
+                return;
+            }
+
+            fetch('/admin/menu-categories', {
+                method : 'POST', 
+                headers : {
+                    'Content-Type' : 'application/json'
+                }, 
+                body : JSON.stringify({newCategory})
+            })
+            .then(resp => resp.json())
+            .then(resp => {
+                if(resp.status === 'success'){
+                    window.location.reload();
+                }else{
+                    alert('An error occurred.');
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                alert('An error occurred.');
+            });
+
+
+        });
+
+        const dropDownPanes = document.querySelectorAll('.dropdown-pane');
+
+        for(pane of dropDownPanes){
+
+            pane.querySelector('.dropdown-pane__title').addEventListener('click', () => {
+
+                pane.querySelector('.dropdown-pane__content').classList.toggle('show');
+
+            });
+
+        }
+    
+    </script>
+</body>
+</html>
