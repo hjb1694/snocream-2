@@ -11,24 +11,32 @@
                 <h1>Specials + Offers</h1>
             </div>
             <div class="container p15">
+                <% if(!specialsOffers.length){ %>
+                    <div>There are no specials or offers at this time. Check back later!</div>
+                <% }else{ %>
                 <div class="offers-specials-list">
+                    <% for(let item of specialsOffers){  %>
                     <div 
                     class="offer-item"
-                    data-img="dots-light.jpg"
-                    data-name="Limited Time Only: Buy One Get One Free"
-                    data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean hendrerit fermentum nulla vel vulputate. Nullam ullamcorper auctor neque eget tristique. Cras nec metus vel tellus ullamcorper dapibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce rutrum interdum leo, vitae commodo neque. Fusce a metus quis justo pellentesque semper id vel odio. Quisque bibendum pulvinar nunc pharetra condimentum. Maecenas a libero sit amet turpis gravida molestie quis et elit. In turpis orci, pharetra quis consequat non, mattis eget diam. Aenean justo metus, iaculis non posuere ut, mollis in velit. Nunc lacinia euismod ligula non porta. Donec vitae nunc quis augue finibus varius id pretium lorem. Ut sit amet nisi ut odio consectetur gravida in molestie lacus. Quisque luctus iaculis arcu et ullamcorper."
+                    data-img="<%= item.offerImage %>"
+                    data-name="<%= item.offerName %>"
+                    data-description="<%= item.offerDescription %>"
                     >
                         <div class="offer-item__img-container">
-                            <img src="/img/dots-light.jpg" alt="generic image" class="offer-item__img">
+                            <img src="/img/<%= item.offerImage %>" alt="generic image" class="offer-item__img">
                         </div>
                         <div class="offer-item__name">
-                            Limited Time Only: Buy One Get One Free
+                            <%= item.offerName %>
                         </div>
+                        <% if(item.offerExpiration){ %>
                         <div class="offer-item__expiration-date">
-                            Expires: Dec. 25, 2020
+                            Expires: <%= item.offerExpiration %>
                         </div>
+                        <% } %>
                     </div>
+                    <% } %>
                 </div>
+                <% } %>
             </div>
             <div class="modal">
                 <div class="modal__content">

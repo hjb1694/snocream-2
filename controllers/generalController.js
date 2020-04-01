@@ -1,5 +1,6 @@
 const {
-    getMenuItems
+    getMenuItems, 
+    getSpecialsOffers
 } = require('../database/queries/general');
 const unique = require('array-unique');
 
@@ -43,11 +44,14 @@ exports.renderMenuPage = async (req,res) => {
 }
 
 
-exports.renderSpecialsOffers = (req,res) => {
+exports.renderSpecialsOffers = async (req,res) => {
+
+    const specialsOffers = await getSpecialsOffers();
 
     res.render('specialsOffers', {
         title : 'Specials &amp; Offers', 
-        ogPath : '/specials-offers'
+        ogPath : '/specials-offers', 
+        specialsOffers
     });
 
 
