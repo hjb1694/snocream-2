@@ -222,7 +222,6 @@ body{
     margin-top:5rem;
     color:#fff;
     font-family:'Lobster', 'cursive';
-    font-size:1.6rem;
     text-align:center;
     padding:1rem 0;
 }
@@ -285,21 +284,30 @@ body{
     display:none;
     align-items:center;
     justify-content:center;
-    overflow-y:auto;
     font-family:'Roboto', sans-serif;
 
     &__content{
         width:22rem;
-        height:25rem;
+        height:26rem;
         background:#fff;
         border-radius:4px;
         padding:1rem;
+        overflow-y:auto;
+    }
+
+    &__img-container{
+        max-width:14rem;
+        height:11rem;
+        margin:auto;
     }
 
     &__img{
         display:block;
         margin:auto;
-        max-height:13rem;
+        max-width:14rem;
+        height:11rem;
+        object-fit:cover;
+        object-position:center;
     }
 
     &__item-name{
@@ -310,7 +318,7 @@ body{
 
     &__item-desc{
         margin-top:.5rem;
-        font-size:1.1rem;
+        font-size:1rem;
         text-align:center;
     }
 }
@@ -321,6 +329,49 @@ body{
     color:#fff;
     font-family:'Roboto', sans-serif;
     font-size:1.2rem;
+}
+
+.offers-specials-list{
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.offer-item{
+    border:1px solid #ccc;
+    overflow:hidden;
+    cursor:pointer;
+    transition:transform .3s;
+    width:14rem;
+    font-family: 'Roboto', 'sans-serif';
+    margin:0 1rem 1rem 0;
+
+    &:hover{
+        transform:scale(1.02);
+    }
+
+    &__img-container{
+        width:14rem;
+        height:10rem;
+    }
+
+    &__img{
+        width:14rem;
+        height:10rem;
+        object-fit:cover;
+        object-position:center;
+    }
+
+    &__name{
+        padding:.5rem;
+        font-size:1.1rem;
+        border-top:1px solid #ccc;
+    }
+
+    &__expiration-date{
+        color:#777;
+        font-size:.8rem;
+        padding:.5rem;
+    }
 }
 
 @media (max-width:550px) {
@@ -398,6 +449,10 @@ body{
         }
     }
 
+    .page-main-heading{
+        font-size:1.15rem;
+    }
+
 
 }
 
@@ -473,6 +528,10 @@ body{
             display:none;
         }
 
+    }
+
+    .page-main-heading{
+        font-size:1.6rem;
     }
 
     .navigation{

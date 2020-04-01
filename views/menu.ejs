@@ -36,7 +36,9 @@
             </div>
             <div class="modal">
                 <div class="modal__content">
-                    <img class="modal__img"/>
+                    <div class="modal__img-container">
+                        <img class="modal__img"/>
+                    </div>
                     <h3 class="modal__item-name"></h3>
                     <p class="modal__item-desc"></p>
                 </div>
@@ -61,6 +63,8 @@
                 modalImg.src = `/img/menu_items/${menuItem.getAttribute('data-img')}`;
                 itemName.innerText = menuItem.getAttribute('data-name');
                 itemDesc.innerText = menuItem.getAttribute('data-description');
+                document.body.style.position = 'fixed';
+                document.body.style.width = '100%';
                 modal.style.display = 'flex';
 
 
@@ -70,6 +74,8 @@
         }
 
         modal.addEventListener('click', () => {
+            document.body.style.position = 'static';
+            document.body.style.width = 'initial';
             modal.style.display = 'none';
         });
 
