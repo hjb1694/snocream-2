@@ -123,5 +123,37 @@ module.exports = {
             throw new Error('unable to fetch data from database.');
         }
 
+    }, 
+    async insertMenuItem({name, category, description, image}){
+
+        try{
+
+            await knex('menu_items').insert({
+                name, 
+                category, 
+                description, 
+                image
+            });
+
+
+        }catch(e){
+            console.log(e);
+            throw new Error('unable to insert data into database.');
+        }
+
+
+    }, 
+    async deleteMenuItem(itemId){
+
+        try{
+
+            await knex('menu_items').where({id : itemId}).del();
+
+        }catch(e){
+            console.log(e);
+            throw new Error('unable to delete item from database.');
+        }
+
+
     }
 }

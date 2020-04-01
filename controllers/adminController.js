@@ -5,10 +5,13 @@ const {
     addMenuCategory, 
     editMenuCategory, 
     getMenuItems, 
-    getSingleMenuItem
+    getSingleMenuItem, 
+    insertMenuItem, 
+    deleteMenuItem
 } = require('../database/queries/admin');
 const bcrypt = require('bcryptjs');
 const unique = require('array-unique');
+const jimp = require('jimp');
 
 exports.loginPage = (req,res) => {
 
@@ -208,6 +211,64 @@ exports.newMenuItem = async (req,res) => {
     const menuCats = await getMenuCats();
 
     res.render('admin/newMenuItem', {menuCats});
+
+
+}
+
+exports.processNewMenuItem = async (req,res) => {
+
+    try{
+
+        const {name, category, description} = req.body;
+        let fileName = 'no-image.jpg';
+
+        if(req.files && req.files.image){
+
+            const date = Date.now();
+            fileName = `${date}-${req.files.image.name}`
+
+            let image = await jimp.read(req.files.image.data)
+            await image
+            .resize(150, jimp.AUTO)
+            .writeAsync(`./public/img/menu_items/${fileName}`);
+
+        }
+
+        await insertMenuItem({
+            name, 
+            category, 
+            description, 
+            image : fileName
+        });
+
+        res.redirect('/admin/menu-items');
+
+        
+
+    }catch(e){
+        console.log(e);
+        res.redirect('/admin/menu-items');
+    }
+
+
+}
+
+
+exports.deleteMenuItem = async (req,res) => {
+
+    const {itemId} = req.body;
+
+    try {
+
+        await deleteMenuItem(itemId);
+
+        res.redirect('/admin/menu-items');
+
+
+    }catch(e){
+        console.log(e);
+        res.redirect('/admin/menu-items');
+    }
 
 
 }

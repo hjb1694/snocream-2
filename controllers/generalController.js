@@ -6,7 +6,8 @@ const unique = require('array-unique');
 exports.renderHomePage = (req,res) => {
 
     res.render('index', {
-        title : 'Home'
+        title : 'Home', 
+        ogPath : '/'
     });
 
 }
@@ -34,7 +35,8 @@ exports.renderMenuPage = async (req,res) => {
     });
 
     res.render('menu', {
-        title : 'menu', 
+        title : 'Menu', 
+        ogPath : '/menu',
         menuItemsByCategory
     });
 

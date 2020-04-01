@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const session = require('express-session');
 const app = express();
 const morgan = require('morgan');
+const methodOverride = require('method-override');
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
 
@@ -28,9 +29,11 @@ if(config.env.toLowerCase() === 'production'){
 app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(helmet());
+app.use(methodOverride('_method'));
 app.use(morgan('combined', {stream : accessLogStream}));
 app.use(session(sessConf));
 app.use(express.json());
+app.use(express.urlencoded({extended : false}));
 app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
 

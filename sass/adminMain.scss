@@ -92,6 +92,11 @@ main{
         color:rgb(240, 67, 67);
     }
 
+    &--warning{
+        border:2px solid orange;
+        color:orange;
+    }
+
     &--block{
         display:block;
         width:100%;
@@ -231,6 +236,8 @@ main{
 }
 
 .menu-items-category{
+    margin-top:2rem;
+
     &__heading{
         font-size:1.2rem;
     }

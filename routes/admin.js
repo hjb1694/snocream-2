@@ -9,6 +9,8 @@ router.post('/menu-categories', adminController.addMenuCategory);
 router.delete('/menu-categories', adminController.deleteMenuCat);
 router.patch('/menu-categories', adminController.editMenuCat);
 router.get('/menu-items/new', adminController.newMenuItem);
+router.post('/menu-items/new', adminController.processNewMenuItem);
+router.delete('/menu-items/delete', adminController.deleteMenuItem);
 router.get('/menu-items/:id', adminController.singleMenuItem);
 router.get('/menu-items', adminController.menuItems);
 
