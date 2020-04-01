@@ -153,6 +153,43 @@ module.exports = {
             console.log(e);
             throw new Error('unable to delete item from database.');
         }
+    }, 
+    async getSpecialsOffers(){
+
+        try{
+
+            const result = await knex.column({
+                id : 'id', 
+                offerName : 'offer_name', 
+                offerDescription : 'offer_description', 
+                offerImage : 'offer_image', 
+                offerExpiration : 'expiration_date'
+            }).from('specials_offers').select();
+
+            return result;
+
+        }catch(e){
+            console.log(e);
+            throw new Error('Unable to fetch data from database.');
+        }
+
+    },
+    async insertNewOffer({offerName, offerDescription, offerImage, expireDate}){
+
+        try{
+
+            await knex('specials_offers').insert({
+                offer_name : offerName, 
+                offer_description : offerDescription, 
+                offer_image : offerImage, 
+                expiration_date : expireDate
+            });
+
+        }catch(e){
+            console.log(e);
+            throw new Error('Unable to insert data into database.');
+        }
+
 
 
     }

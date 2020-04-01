@@ -13,5 +13,7 @@ router.post('/menu-items/new', adminController.processNewMenuItem);
 router.delete('/menu-items/delete', adminController.deleteMenuItem);
 router.get('/menu-items/:id', adminController.singleMenuItem);
 router.get('/menu-items', adminController.menuItems);
+router.get('/specials-offers', adminController.renderSpecialsOffers);
+router.post('/specials-offers', adminController.addSpecialOffer);
 
 module.exports = router;

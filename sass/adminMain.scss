@@ -54,16 +54,27 @@ main{
     display:block;
     text-align:left;
     font-size:1rem;
-    color:#555
+    color:#555;
+
+    sup{
+        color:red;
+    }
 }
 
-.text-input, .select-input{
+.text-input, .select-input, .textarea{
     border:0;
     background:rgb(216, 230, 255);
-    font-size:1.5rem;
     padding:.5rem .8rem;
     font-family:inherit;
     width:100%;
+}
+
+.text-input, .select-input{
+    font-size:1.5rem;
+}
+
+.textarea{
+    font-size:1rem;
 }
 
 .file-input{
@@ -284,4 +295,46 @@ main{
 .add-menu-item-form{
     margin:2rem auto;
     max-width:30rem;
+}
+
+fieldset{
+    border:0;
+}
+
+legend{
+    font-size:1.2rem;
+    text-align:left;
+}
+
+.currentOffersList{
+    display:block;
+    margin-top:3rem;
+    max-width:30rem;
+    margin:auto;
+
+    &__heading{
+        font-size:1.2rem;
+        padding-bottom:.5rem;
+        border-bottom:1px solid #ccc;
+    }
+}
+
+.offer-item{
+    margin:1rem 0;
+    border:1px solid #ccc;
+    padding:1rem;
+
+    &__title{
+        font-size:1.2rem;
+    }
+
+    &__img{
+        max-width:15rem;
+        margin:1rem 0;
+    }
+
+    &__expireDate{
+        font-size:1.2rem;
+    }
+
 }

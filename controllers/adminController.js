@@ -7,11 +7,14 @@ const {
     getMenuItems, 
     getSingleMenuItem, 
     insertMenuItem, 
-    deleteMenuItem
+    deleteMenuItem, 
+    getSpecialsOffers, 
+    insertNewOffer
 } = require('../database/queries/admin');
 const bcrypt = require('bcryptjs');
 const unique = require('array-unique');
 const jimp = require('jimp');
+const moment = require('moment');
 
 exports.loginPage = (req,res) => {
 
@@ -269,6 +272,88 @@ exports.deleteMenuItem = async (req,res) => {
         console.log(e);
         res.redirect('/admin/menu-items');
     }
+
+
+}
+
+
+exports.renderSpecialsOffers = async (req,res) => {
+
+    const offersSpecials = await getSpecialsOffers();
+
+    res.render('admin/specialsOffers', {offersSpecials});
+
+}
+
+exports.addSpecialOffer = async (req,res) => {
+
+    try{
+
+    const {title, description} = req.body;
+    let offerExpireDate = null;
+    let dbOfferExpireDate = null;
+    let validationErrors = [];
+    let imageName = 'dots-light.jpg';
+    let imagePath = imageName;
+
+    if(req.body.offerExpireDate){
+
+        dbOfferExpireDate = req.body.offerExpireDate;
+
+        offerExpireDate = moment(req.body.offerExpireDate, 'YYYY-MM-DD');
+
+        !offerExpireDate.isValid() && validationErrors.push('Date must be a valid date.');
+
+        !offerExpireDate.isAfter(moment(new Date(), 'YYYY-MM-DD')) && validationErrors.push('Date must be after today.');
+    }
+
+    if(validationErrors.length)
+        res.status(422).json({
+            status : 'error', 
+            data : {
+                errors : validationErrors
+            }
+        })
+
+    if(req.files && req.files.image){
+
+        const date = Date.now();
+        imageName = `${date}-${req.files.image.name}`
+
+        let image = await jimp.read(req.files.image.data)
+        await image
+        .resize(150, jimp.AUTO)
+        .writeAsync(`./public/img/offers_img/${imageName}`);
+
+        imagePath = `offers_img/${imageName}`;
+
+    }
+
+    console.log(dbOfferExpireDate);
+
+    await insertNewOffer({
+        offerName : title, 
+        offerDescription : description, 
+        offerImage : imagePath, 
+        expireDate : dbOfferExpireDate
+    });
+
+    res.status(201).json({
+        status : 'success', 
+        data : {
+            msg : 'Successfully added!'
+        }
+    });
+
+}catch(e){
+    console.log(e);
+    res.status(500).json({
+        status : 'error', 
+        data : {
+            errors : ['A server error has occurred.']
+        }
+    });
+}
 
 
 }

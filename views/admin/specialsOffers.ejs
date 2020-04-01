@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head -->
+<%- include('partials/head.ejs') %>
+<body class="p1 text-center">
+    <img src="/img/snocream-logo-transparent.png" class="logo"/>
+    <h1>Administration Panel</h1>
+    <h2>Specials + Offers</h2>
+    <nav class="subpanel-nav">
+        <a href="/admin"><i class="fa fa-caret-left"></i> Main Panel</a>
+        <a>Logout <i class="fa fa-sign-out"></i></a>
+    </nav>
+    <div class="dropdown-pane">
+        <div class="dropdown-pane__title">
+            <span>Add Special or Offer</span>
+        </div>
+        <div class="dropdown-pane__content">
+            <form action="" class="add-special-offer-form">
+                <div class="form-group">
+                    <label for="title" class="label">Title<sup>*</sup></label>
+                    <input type="text" name="title" id="title" class="text-input">
+                </div>
+                <div class="form-group">
+                    <label for="description" class="label">Description/Details<sup>*</sup></label>
+                    <textarea name="description" id="description" rows="5" class="textarea"></textarea>
+                </div>
+                <div class="form-group">
+                    <fieldset>
+                        <legend>Expiration Date</legend>
+                        <div class="form-group">
+                            <label for="expirationMonth" class="label">Month</label>
+                            <select class="select-input" name="expirationMonth" id="expirationMonth">
+                                <option value="">--SELECT--</option>
+                                <option value="1">January</option>
+                                <option value="2">Feburary</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="day" class="label">Day</label>
+                            <select name="day" id="day" class="select-input">
+                                <option value="">--SELECT--</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="year" class="label">Year</label>
+                            <select name="year" id="year" class="select-input">
+                                <option value="">--SELECT--</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="image" class="label">Image</label>
+                            <input type="file" name="image" id="image" class="file-input">
+                        </div>
+                        <div class="form-group">
+                            <button id="newSubbut" class="btn btn--primary btn--block">Submit</button>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="errbox"></div>
+            </form>
+        </div>
+    </div>
+    <section class="currentOffersList">
+        <h3 class="currentOffersList__heading">Current Specials + Offers</h3>
+        <% if(!offersSpecials.length){ %>
+
+            <div style="font-size:1rem;">
+                You have no current specials or offers
+            </div>
+
+        <% }else{  
+            for(let item of offersSpecials){  
+        %>
+            <div class="offer-item">
+                <div class="offer-item__title">
+                    <%= item.offerName %>
+                </div>
+                <img 
+                class="offer-item__img"
+                src="/img/<%= item.offerImage %>" 
+                alt="<%= item.offerName %>"/>
+                <div class="offer-item__expireDate">
+                    <% if(item.offerExpiration){ %>
+                    Expires: <%= item.offerExpiration %>
+                    <% }else{ %>
+                    [No Expiration Date]
+                    <% } %>
+                </div>
+            </div>
+                
+        <% }} %>
+    </section>
+    <script>
+        const addOfferSubbut = document.querySelector('#newSubbut');
+        const errbox = document.querySelector('.errbox');
+
+        addOfferSubbut.addEventListener('click', e => {
+            e.preventDefault();
+            addOfferSubbut.disabled = true;
+            errbox.style.display = 'none';
+            errbox.innerHTML = null;
+
+            const fields = {
+                title : document.querySelector('#title').value.trim(), 
+                description : document.querySelector('#description').value.trim(), 
+                expireMonth : document.querySelector('#expirationMonth').value, 
+                expireDay : document.querySelector('#day').value, 
+                expireYear : document.querySelector('#year').value, 
+                image : document.querySelector('#image').files[0]
+            }
+
+            const errors = [];
+
+            !fields.title.length && errors.push('Please enter a title.');
+            !fields.description.length && errors.push('Please enter a description/details.');
+
+            function addErrorsToErrbox(errors){
+                errbox.style.display = 'block';
+                addOfferSubbut.disabled = false;
+
+                for(let err of errors){
+                    errbox.insertAdjacentHTML('beforeend', `<p>${err}</p>`);
+                }
+
+            }
+
+
+            if(errors.length){
+                addErrorsToErrbox(errors);
+                addOfferSubbut.disabled = false;
+                return;
+            }
+
+            const fd = new FormData();
+            fd.append('title', fields.title);
+            fd.append('description', fields.description);
+
+            if(fields.expireMonth && fields.expireDay && fields.expireYear){
+                fd.append('offerExpireDate', `${fields.expireYear}-${fields.expireMonth}-${fields.expireDay}`);
+            }
+
+            if(fields.image){
+                fd.append('image', fields.image);
+            }
+
+            fetch('/admin/specials-offers', {
+                method : 'POST', 
+                body : fd
+            })
+            .then(resp => resp.json())
+            .then(resp => {
+                console.log(resp);
+                if(resp.status === 'error' && resp.data.errors){
+                    addErrorsToErrbox(resp.data.errors);
+                }else if(resp.status === 'success'){
+                    window.location.reload();
+                }else{
+                    addErrorsToErrbox('An error has occurred.');
+                }
+            })
+            .catch(err => {
+                addErrorsToErrbox(['An error has occurred.']);
+            });
+
+
+        });
+
+
+        const dayInput = document.querySelector('#day');
+        const yearInput = document.querySelector('#year');
+
+        for(let i = 1; i <= 31; i++){
+            dayInput.insertAdjacentHTML('beforeend', `<option value="${i}">${i}</option>`);
+        }
+
+        const curYear = new Date().getFullYear();
+
+        for(let i = curYear; i < curYear + 2; i++){
+            yearInput.insertAdjacentHTML('beforeend', `<option value="${i}">${i}</option>`);
+        }
+
+        const dropDownPanes = document.querySelectorAll('.dropdown-pane');
+
+        for(pane of dropDownPanes){
+
+            pane.querySelector('.dropdown-pane__title').addEventListener('click', () => {
+
+                pane.querySelector('.dropdown-pane__content').classList.toggle('show');
+
+            });
+
+        }
+    </script>
+</body>
+</html>
