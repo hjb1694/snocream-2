@@ -41,3 +41,14 @@ exports.renderMenuPage = async (req,res) => {
     });
 
 }
+
+
+exports.renderSpecialsOffers = (req,res) => {
+
+    res.render('specialsOffers', {
+        title : 'Specials &amp; Offers', 
+        ogPath : '/specials-offers'
+    });
+
+
+}

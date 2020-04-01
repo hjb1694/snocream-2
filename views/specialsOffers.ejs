@@ -8,31 +8,10 @@
     <div class="mainContainer">
         <main>
             <div class="page-main-heading">
-                <h1>Our Menu</h1>
+                <h1>Specials + Offers</h1>
             </div>
             <div class="container p15">
-                <% for(category of menuItemsByCategory) { %>
-                <div class="menu-cat">
-                    <h2 class="menu-cat__heading"><%= category.category %></h2>
-                    <div class="menu-cat__menu-items">
-                        <% for(menuItem of category.menuItems) { %>
-                        <div 
-                        class="menu-item"
-                        data-name="<%= menuItem.name %>"
-                        data-description="<%= menuItem.description %>"
-                        data-img="<%= menuItem.image %>"
-                        >
-                            <div class="menu-item__img-container">
-                                <img class="menu-item__img" src="/img/menu_items/<%= menuItem.image %>" alt="<%= menuItem.name %>">
-                            </div>
-                            <div class="menu-item__name">
-                                <%= menuItem.name %>
-                            </div>
-                        </div>
-                        <% } %>
-                    </div>
-                </div>
-                <% } %>
+                
             </div>
             <div class="modal">
                 <div class="modal__content">
@@ -47,7 +26,7 @@
     <%- include('./partials/footer.ejs') %>
     <script src="/js/navToggle.js"></script>
     <script>
-        const menuItems = document.querySelectorAll('.menu-item');
+        const offerItems = document.querySelectorAll('.offer-item');
         const modal = document.querySelector('.modal');
         const modalContent = document.querySelector('.modal__content');
         const modalImg = document.querySelector('.modal__img');

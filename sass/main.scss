@@ -67,6 +67,7 @@ body{
 
 .mainContainer{
     margin-top:5rem;
+    min-height:80vh;
 }
 
 .container{
@@ -216,12 +217,12 @@ body{
     top:-2.5rem;
 }
 
-.menu-main-heading{
+.page-main-heading{
     background:#274869;
     margin-top:5rem;
     color:#fff;
     font-family:'Lobster', 'cursive';
-    font-size:2rem;
+    font-size:1.6rem;
     text-align:center;
     padding:1rem 0;
 }
@@ -245,6 +246,12 @@ body{
 .menu-item{
     border:1px solid #ccc;
     overflow:hidden;
+    cursor:pointer;
+    transition:transform .3s;
+
+    &:hover{
+        transform:scale(1.02);
+    }
 
     &__img{
         object-fit:cover;
