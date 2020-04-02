@@ -74,7 +74,7 @@
         <h3 class="currentOffersList__heading">Current Specials + Offers</h3>
         <% if(!offersSpecials.length){ %>
 
-            <div style="font-size:1rem;">
+            <div style="font-size:1rem; margin-top:1rem;">
                 You have no current specials or offers
             </div>
 
@@ -99,11 +99,41 @@
                 <div class="offer-item__desc">
                     <%= item.offerDescription %>
                 </div>
+                <form class="deleteOfferForm" id="deleteOfferForm-<%= item.id %>" action="/admin/specials-offers?_method=DELETE" method="POST">
+                    <input type="hidden" name="itemId" value="<%= item.id %>">
+                    <button type="submit" data-itemId="<%= item.id %>" class="delSubbut btn btn--danger btn--block">Delete</button>
+                </form>
             </div>
                 
         <% }} %>
     </section>
     <script>
+        
+        const delSubbuts = document.querySelectorAll('.delSubbut');
+
+        if(delSubbuts.length){
+
+            for(let delSubbut of delSubbuts){
+
+                delSubbut.addEventListener('click', e => {
+
+                    e.preventDefault();
+
+                    const conf = confirm('Are you sure you want to delete this offer?');
+
+                    if(!conf) return;
+
+                    document.querySelector(`#deleteOfferForm-${e.target.getAttribute('data-itemId')}`).submit();
+
+                });
+
+
+            }
+
+
+        }
+
+
         const addOfferSubbut = document.querySelector('#newSubbut');
         const errbox = document.querySelector('.errbox');
 

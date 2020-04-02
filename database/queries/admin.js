@@ -192,5 +192,20 @@ module.exports = {
 
 
 
+    }, 
+    async deleteOffer(id){
+
+        try{
+
+            await knex('specials_offers').where({id}).del();
+
+
+        }catch(e){
+            console.log(e);
+            throw new Error('Server unable to delete item from database.');
+
+        }
+
+
     }
 }

@@ -9,7 +9,8 @@ const {
     insertMenuItem, 
     deleteMenuItem, 
     getSpecialsOffers, 
-    insertNewOffer
+    insertNewOffer, 
+    deleteOffer
 } = require('../database/queries/admin');
 const bcrypt = require('bcryptjs');
 const unique = require('array-unique');
@@ -345,15 +346,32 @@ exports.addSpecialOffer = async (req,res) => {
         }
     });
 
-}catch(e){
-    console.log(e);
-    res.status(500).json({
-        status : 'error', 
-        data : {
-            errors : ['A server error has occurred.']
-        }
-    });
+    }catch(e){
+        console.log(e);
+        res.status(500).json({
+            status : 'error', 
+            data : {
+                errors : ['A server error has occurred.']
+            }
+        });
+    }
+
+
 }
+
+exports.deleteSpecialOffer = async (req,res) => {
+
+    try{ 
+
+        const itemId = req.body.itemId;
+
+        await deleteOffer(itemId);
+
+        res.redirect('/admin/specials-offers');
+
+    }catch(e){
+        console.log(e);
+    }
 
 
 }

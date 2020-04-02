@@ -15,5 +15,6 @@ router.get('/menu-items/:id', adminController.singleMenuItem);
 router.get('/menu-items', adminController.menuItems);
 router.get('/specials-offers', adminController.renderSpecialsOffers);
 router.post('/specials-offers', adminController.addSpecialOffer);
+router.delete('/specials-offers', adminController.deleteSpecialOffer);
 
 module.exports = router;
